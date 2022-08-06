@@ -1,0 +1,13 @@
+[package]
+name = "qini"
+version = "1.0.0-beta.1"
+edition = "2021"
+license = "0BSD"
+
+[lib]
+path = 'qini.rs'
+test = false
+
+[[test]]
+name = 'test_qini'
+path = 'test/test_qini.rs'

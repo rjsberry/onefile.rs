@@ -1,0 +1,12 @@
+[workspace]
+members = [
+    "qini",
+]
+default-members = ["qini"]
+
+[profile.bench]
+debug = true
+
+[profile.nopanic]
+inherits = "release"
+panic = "abort"
