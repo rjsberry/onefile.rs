@@ -1,0 +1,17 @@
+[package]
+name = "qjson-bench"
+version = "1.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+criterion = "*"
+qjson = { path = ".." }
+serde = "1"
+serde_derive = "1"
+serde_json = "1"
+
+[[bench]]
+name = "bench_qjson"
+path = "bench_qjson.rs"
+harness = false

@@ -1,0 +1,13 @@
+[package]
+name = "qjson-fuzz"
+version = "1.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+afl = "*"
+qjson = { path = ".." }
+
+[[bin]]
+name = "fuzz_qjson"
+path = "fuzz_qjson.rs"

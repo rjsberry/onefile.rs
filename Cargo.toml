@@ -1,8 +1,9 @@
 [workspace]
 members = [
     "qini",
+    "qjson", "qjson/bench", "qjson/fuzz", "qjson/nopanic",
 ]
-default-members = ["qini"]
+default-members = ["qini", "qjson"]
 
 [profile.bench]
 debug = true
