@@ -1,0 +1,17 @@
+[package]
+name = "qptr-nopanic"
+version = "1.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+libc = "*"
+qptr = { path = ".." }
+
+[[bin]]
+name = "qptr_shared_nopanic"
+path = "qptr_shared_nopanic.rs"
+
+[[bin]]
+name = "qptr_unique_nopanic"
+path = "qptr_unique_nopanic.rs"

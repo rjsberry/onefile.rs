@@ -450,6 +450,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "qptr"
+version = "1.0.0-beta.1"
+
+[[package]]
+name = "qptr-nopanic"
+version = "1.0.0"
+dependencies = [
+ "libc",
+ "qptr",
+]
+
+[[package]]
 name = "quote"
 version = "1.0.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"

@@ -2,8 +2,9 @@
 members = [
     "qini",
     "qjson", "qjson/bench", "qjson/fuzz", "qjson/nopanic",
+    "qptr", "qptr/nopanic"
 ]
-default-members = ["qini", "qjson"]
+default-members = ["qini", "qjson", "qptr"]
 
 [profile.bench]
 debug = true
