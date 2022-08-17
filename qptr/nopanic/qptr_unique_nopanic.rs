@@ -10,7 +10,7 @@ use qptr::{make_static_unique, Unique};
 
 #[no_mangle]
 unsafe extern "C" fn main(argc: isize, _argv: *const *const u8) -> isize {
-    let ptr: Unique<dyn Any> = make_static_unique!(|| -> isize { argc }).unwrap_unchecked();
+    let ptr: Unique<dyn Any> = make_static_unique!(|| -> isize { argc - 1 }).unwrap_unchecked();
     *ptr.downcast::<isize>().unwrap_unchecked()
 }
 

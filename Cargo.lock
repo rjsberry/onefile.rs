@@ -462,6 +462,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "qptr-san"
+version = "1.0.0"
+dependencies = [
+ "qptr",
+]
+
+[[package]]
 name = "quote"
 version = "1.0.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"

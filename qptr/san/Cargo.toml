@@ -1,0 +1,16 @@
+[package]
+name = "qptr-san"
+version = "1.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+qptr = { path = ".." }
+
+[[bin]]
+name = "qptr_shared_san"
+path = "qptr_shared_san.rs"
+
+[[bin]]
+name = "qptr_unique_san"
+path = "qptr_unique_san.rs"

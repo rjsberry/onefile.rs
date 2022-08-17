@@ -2,7 +2,7 @@
 members = [
     "qini",
     "qjson", "qjson/bench", "qjson/fuzz", "qjson/nopanic",
-    "qptr", "qptr/nopanic"
+    "qptr", "qptr/nopanic", "qptr/san",
 ]
 default-members = ["qini", "qjson", "qptr"]
 

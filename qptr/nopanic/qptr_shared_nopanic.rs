@@ -10,7 +10,7 @@ use qptr::{make_static_shared, Shared};
 
 #[no_mangle]
 unsafe extern "C" fn main(argc: isize, _argv: *const *const u8) -> isize {
-    let ptr: Shared<dyn Any> = make_static_shared!(|| -> isize { argc }).unwrap_unchecked();
+    let ptr: Shared<dyn Any> = make_static_shared!(|| -> isize { argc - 1 }).unwrap_unchecked();
     *ptr.downcast::<isize>().unwrap_unchecked()
 }
 
