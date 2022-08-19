@@ -1,3 +1,7 @@
+# _quick.rs_
+
+![ci_status](https://github.com/rjsberry/quick.rs/actions/workflows/ci.yml/badge.svg)
+
 Public domain single file Rust libraries.
 
 | library   | description                                      | dependencies |

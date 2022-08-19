@@ -1,0 +1,38 @@
+on: [push, pull_request]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: --deny warnings
+
+jobs:
+  check:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{matrix.os}}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Rust Toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        override: true
+        toolchain: stable
+    - name: Check
+      run: cargo check --verbose
+    - name: Build
+      run: cargo build --verbose
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{matrix.os}}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Rust Toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        override: true
+        toolchain: nightly
+        components: miri
+    - name: Test
+      run: find . -name "test.sh" -exec sh -c 'echo "\033[1m{}\033[0m"; {}' \;
