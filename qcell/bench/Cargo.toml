@@ -1,0 +1,16 @@
+[package]
+name = "qcell-bench"
+version = "1.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+criterion = "*"
+flume = "*"
+parking_lot = "*"
+qcell = { path = ".." }
+
+[[bench]]
+name = "bench_qcell"
+path = "bench_qcell.rs"
+harness = false
