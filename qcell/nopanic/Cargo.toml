@@ -1,0 +1,13 @@
+[package]
+name = "qcell-nopanic"
+version = "1.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+libc = "*"
+qcell = { path = ".." }
+
+[[bin]]
+name = "qcell_nopanic"
+path = "qcell_nopanic.rs"

@@ -4,12 +4,14 @@
 
 Public domain single file Rust libraries.
 
-| library   | description                                      | dependencies |
-|-----------|--------------------------------------------------|--------------|
-| [`qini`]  | .ini parser                                      | `libcore`    |
-| [`qjson`] | json deserializer                                | `libcore`    |
-| [`qptr`]  | allocation-free smart pointers and trait objects | `libcore`    |
+| library   | description                                          | dependencies | optional dependencies |
+|-----------|------------------------------------------------------|--------------|-----------------------|
+| [`qcell`] | thread-safe lock-free interior mutability primitives | `libcore`    | `atomic-polyfill`     |
+| [`qini`]  | .ini parser                                          | `libcore`    |                       |
+| [`qjson`] | json deserializer                                    | `libcore`    |                       |
+| [`qptr`]  | allocation-free smart pointers and trait objects     | `libcore`    |                       |
 
+[`qcell`]: qcell/qcell.rs
 [`qini`]: qini/qini.rs
 [`qjson`]: qjson/qjson.rs
 [`qptr`]: qptr/qptr.rs
