@@ -1,0 +1,12 @@
+[package]
+name = "qbump"
+version = "1.0.0-beta.1"
+edition = "2021"
+license = "0BSD"
+
+[dependencies]
+atomic-polyfill = { version = "1", optional = true }
+
+[lib]
+path = 'qbump.rs'
+test = false

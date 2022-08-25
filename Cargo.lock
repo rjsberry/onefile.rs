@@ -519,6 +519,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "qbump"
+version = "1.0.0-beta.1"
+dependencies = [
+ "atomic-polyfill",
+]
+
+[[package]]
 name = "qcell"
 version = "1.0.0-beta.1"
 dependencies = [

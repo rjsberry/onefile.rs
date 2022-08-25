@@ -1,11 +1,12 @@
 [workspace]
 members = [
+    "qbump",
     "qcell", "qcell/bench", "qcell/nopanic", "qcell/san",
     "qini",
     "qjson", "qjson/bench", "qjson/fuzz", "qjson/nopanic",
     "qptr", "qptr/nopanic", "qptr/san",
 ]
-default-members = ["qcell", "qini", "qjson", "qptr"]
+default-members = ["qbump", "qcell", "qini", "qjson", "qptr"]
 
 [profile.bench]
 debug = true
