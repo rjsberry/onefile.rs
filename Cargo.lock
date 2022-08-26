@@ -526,6 +526,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "qbump-bench"
+version = "1.0.0"
+dependencies = [
+ "criterion",
+ "qbump",
+]
+
+[[package]]
 name = "qcell"
 version = "1.0.0-beta.1"
 dependencies = [

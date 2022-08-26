@@ -32,7 +32,9 @@ macro_rules! test_err {
     ) => {
         #[test]
         fn $name() {
-            let err = qini::parse($ini).collect::<Result<Vec<_>, _>>().unwrap_err();
+            let err = qini::parse($ini)
+                .collect::<Result<Vec<_>, _>>()
+                .unwrap_err();
 
             assert_eq!(err.lineno(), $lineno);
             assert_eq!(err.kind(), $kind);

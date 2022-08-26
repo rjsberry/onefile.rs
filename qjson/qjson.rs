@@ -12,27 +12,27 @@
 // OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 //! A zero allocation recursive descent JSON deserializer.
-//! 
+//!
 //! This library is part of [`quick.rs`]; it is a single file, dependency
 //! free, `no_std` library with a [0BSD] license (no attribution required).
-//! 
+//!
 //! # Installation
-//! 
+//!
 //! The quickest way to start using it is to copy the [source code] into
 //! your project, then declare it as a module:
-//! 
+//!
 //! ```ignore
 //! mod qjson;
 //! ```
-//! 
+//!
 //! Alternatively, the crate is also published to [crates.io] and can be
 //! added to your `Cargo.toml` instead:
-//! 
+//!
 //! ```toml
 //! [dependencies]
 //! qjson = "1.0.0-beta.1"
 //! ```
-//! 
+//!
 //! [`quick.rs`]: https://github.com/rjsberry/quick.rs
 //! [0BSD]: https://choosealicense.com/licenses/0bsd/
 //! [source code]: ../src/qjson/qjson.rs.html
@@ -68,7 +68,7 @@ use self::{ErrorKind::*, Token::*};
 ///     adc_channels: [Option<i64>; 2],
 ///     capacity: Option<f64>,
 /// }
-/// 
+///
 /// let src = r#"{
 ///     "description": "battery backup",
 ///     "adc_channels": [1, 2],
