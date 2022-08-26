@@ -16,7 +16,7 @@ jobs:
       uses: actions-rs/toolchain@v1
       with:
         override: true
-        toolchain: stable
+        toolchain: nightly
     - name: Check
       run: cargo check --verbose
     - name: Build
