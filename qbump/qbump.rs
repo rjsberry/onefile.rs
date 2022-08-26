@@ -117,8 +117,13 @@ macro_rules! static_buf {
 
         $(#[$m])*
         static BUF: RacyCell = RacyCell(::core::cell::UnsafeCell::new([0; $len]));
+        static USE: ::core::sync::atomic::AtomicBool = ::core::sync::atomic::AtomicBool::new(false);
 
-        unsafe { &mut *BUF.0.get() as &mut [_] }
+        if !USE.swap(true, ::core::sync::atomic::Ordering::Relaxed) {
+            unsafe { &mut *BUF.0.get() as &mut [_] }
+        } else {
+            &mut [][..]
+        }
     }}
 }
 
