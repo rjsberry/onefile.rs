@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "qbump",
+    "qbump", "qbump/bench",
     "qcell", "qcell/bench", "qcell/nopanic", "qcell/san",
     "qini",
     "qjson", "qjson/bench", "qjson/fuzz", "qjson/nopanic",
