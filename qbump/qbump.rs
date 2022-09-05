@@ -66,18 +66,20 @@
 
 #![no_std]
 #![feature(allocator_api)]
+#![feature(core_intrinsics)]
 #![feature(nonnull_slice_from_raw_parts)]
 #![feature(strict_provenance)]
 
 extern crate alloc;
 
-use core::cell::Cell;
+use core::cell::{Cell, UnsafeCell};
+use core::intrinsics;
 use core::marker::PhantomData;
 use core::mem::MaybeUninit;
 use core::ptr::{self, NonNull};
 use core::sync::atomic::{self, AtomicPtr, AtomicUsize, Ordering::*};
 
-use alloc::alloc::{AllocError, Allocator, Layout};
+use alloc::alloc::{AllocError, Allocator, GlobalAlloc, Layout};
 
 /// A single threaded bump allocator.
 pub struct Bump<'a> {
@@ -97,6 +99,13 @@ pub struct AtomicBump<'a> {
     count: AtomicUsize,
 
     _marker: PhantomData<&'a ()>,
+}
+
+/// A global single threaded bump allocator.
+pub struct GlobalBump<const N: usize> {
+    buf: UnsafeCell<[u8; N]>,
+    uninit: Cell<bool>,
+    bump: UnsafeCell<MaybeUninit<Bump<'static>>>,
 }
 
 /// Safely return a reference to a static mutable buffer.
@@ -296,5 +305,62 @@ unsafe impl Allocator for AtomicBump<'_> {
                 self.head.store(self.upper, Release);
             }
         }
+    }
+}
+
+// impl GlobalBump
+
+unsafe impl<const N: usize> Sync for GlobalBump<N> {}
+
+impl<const N: usize> GlobalBump<N> {
+    /// Creates a new global bump allocator.
+    ///
+    /// # Safety
+    ///
+    /// It is only safe to call this function in a single threaded application
+    /// and a static context.
+    ///
+    /// Any other usage will result in undefined behaviour.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use qbump::GlobalBump;
+    ///
+    /// #[global_allocator]
+    /// static BUMP: GlobalBump<{ 512 * 1024 }> = unsafe { GlobalBump::new() };
+    /// ```
+    pub const unsafe fn new() -> Self {
+        Self {
+            buf: UnsafeCell::new([0; N]),
+            uninit: Cell::new(true),
+            bump: UnsafeCell::new(MaybeUninit::uninit()),
+        }
+    }
+}
+
+impl<const N: usize> GlobalBump<N> {
+    fn bump(&self) -> &Bump {
+        unsafe {
+            let bump = (&mut *self.bump.get()).as_mut_ptr();
+            if intrinsics::unlikely(self.uninit.get()) {
+                ptr::write(bump, Bump::from_ptr(self.buf.get() as *mut u8, N));
+                self.uninit.set(false);
+            }
+            &*bump
+        }
+    }
+}
+
+unsafe impl<const N: usize> GlobalAlloc for GlobalBump<N> {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        match self.bump().allocate(layout) {
+            Ok(mut ptr) => ptr.as_mut().as_mut_ptr(),
+            Err(_) => intrinsics::abort(),
+        }
+    }
+
+    unsafe fn dealloc(&self, _: *mut u8, layout: Layout) {
+        self.bump().deallocate(NonNull::dangling(), layout);
     }
 }

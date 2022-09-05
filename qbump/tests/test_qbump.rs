@@ -125,7 +125,7 @@ fn bump_dyn() {
 
 #[test]
 fn static_bump() {
-    let bump = Bump::new(static_buf!([u8; 4]));
+    let bump = Bump::new(static_buf!([u8; 8]));
     let ptr = Box::try_new_in(123_i32, &bump).unwrap();
     assert_eq!(*ptr, 123);
 }
